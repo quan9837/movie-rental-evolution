@@ -65,6 +65,14 @@ class Rental {
         }
         return result;
     }
+    // Thêm hàm để tự tính điểm thưởng
+    int getFrequentRenterPoints() {
+        if ((getMovie().getPriceCode() == Movie.NEW_RELEASE) && getDaysRented() > 1) {
+            return 2; // Thưởng 2 điểm cho phim mới thuê trên 1 ngày
+        } else {
+            return 1; // Các trường hợp khác nhận 1 điểm
+        }
+    }
 }
 
 // --- Lớp Customer: Quản lý khách hàng và hóa đơn ---
@@ -120,13 +128,15 @@ class Customer {
         thisAmount = each.getCharge();
             
 
-            // Cộng điểm thưởng
-            frequentRenterPoints++;
+            // // Cộng điểm thưởng
+            // frequentRenterPoints++;
 
-            // Thưởng thêm cho phim mới thuê trên 1 ngày
-            if (each.getMovie().getPriceCode() == Movie.NEW_RELEASE
-                    && each.getDaysRented() > 1)
-                frequentRenterPoints++;
+            // // Thưởng thêm cho phim mới thuê trên 1 ngày
+            // if (each.getMovie().getPriceCode() == Movie.NEW_RELEASE
+            //         && each.getDaysRented() > 1)
+            //     frequentRenterPoints++;
+                // THAY BẰNG DÒNG NÀY:
+            frequentRenterPoints += each.getFrequentRenterPoints();
 
             // Hiển thị chi tiết từng phim
             result += "\t" + each.getMovie().getTitle()
