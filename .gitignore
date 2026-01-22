@@ -1,0 +1,6 @@
+# Bỏ qua tất cả các file thực thi đã biên dịch
+*.class
+
+# Bỏ qua các thư mục tài liệu và thư mục tạm
+New folder/
+Slide/
