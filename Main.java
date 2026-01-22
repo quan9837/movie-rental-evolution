@@ -45,6 +45,26 @@ class Rental {
     public Movie getMovie() {
         return _movie;
     }
+    // Thêm hàm này vào lớp Rental
+    double getCharge() {
+        double result = 0;
+        switch (getMovie().getPriceCode()) {
+            case Movie.REGULAR:
+                result += 2;
+                if (getDaysRented() > 2)
+                    result += (getDaysRented() - 2) * 1.5;
+                break;
+            case Movie.NEW_RELEASE:
+                result += getDaysRented() * 3;
+                break;
+            case Movie.CHILDRENS:
+                result += 1.5;
+                if (getDaysRented() > 3)
+                    result += (getDaysRented() - 3) * 1.5;
+                break;
+        }
+        return result;
+    }
 }
 
 // --- Lớp Customer: Quản lý khách hàng và hóa đơn ---
@@ -94,7 +114,10 @@ class Customer {
             //             thisAmount += (each.getDaysRented() - 3) * 1.5;
             //         break;
             // Thay thế khối switch bằng lời gọi hàm
-            thisAmount = amountFor(each);
+            
+            // Trong vòng lặp while của hàm statement():
+// Thay đổi dòng này: thisAmount = amountFor(each);
+        thisAmount = each.getCharge();
             
 
             // Cộng điểm thưởng
@@ -119,26 +142,26 @@ class Customer {
         return result;
     }
     
-        // Thêm hàm này vào lớp Customer
-private double amountFor(Rental eRental) {
-    double result = 0;
-    switch (eRental.getMovie().getPriceCode()) {
-        case Movie.REGULAR:
-            result += 2;
-            if (eRental.getDaysRented() > 2)
-                result += (eRental.getDaysRented() - 2) * 1.5;
-            break;
-        case Movie.NEW_RELEASE:
-            result += eRental.getDaysRented() * 3;
-            break;
-        case Movie.CHILDRENS:
-            result += 1.5;
-            if (eRental.getDaysRented() > 3)
-                result += (eRental.getDaysRented() - 3) * 1.5;
-            break;
-    }
-    return result;
-}
+        // xóa hàm này vào lớp Customer
+// private double amountFor(Rental eRental) {
+//     double result = 0;
+//     switch (eRental.getMovie().getPriceCode()) {
+//         case Movie.REGULAR:
+//             result += 2;
+//             if (eRental.getDaysRented() > 2)
+//                 result += (eRental.getDaysRented() - 2) * 1.5;
+//             break;
+//         case Movie.NEW_RELEASE:
+//             result += eRental.getDaysRented() * 3;
+//             break;
+//         case Movie.CHILDRENS:
+//             result += 1.5;
+//             if (eRental.getDaysRented() > 3)
+//                 result += (eRental.getDaysRented() - 3) * 1.5;
+//             break;
+//     }
+//     return result;
+// }
 }
 
 // --- Lớp chạy chương trình ---
